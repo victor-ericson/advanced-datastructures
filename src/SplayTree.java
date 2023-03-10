@@ -18,9 +18,10 @@ public class SplayTree<AnyType extends Comparable<? super AnyType>> {
 
     public void insert(AnyType x) {
         operations++;
-        if (newNode == null)
-
-        newNode = new BinaryNode<AnyType>(null);
+        if (newNode == null){
+            newNode = new BinaryNode<>(null);
+            operations++;
+        }
 
         newNode.element = x;
 
@@ -30,7 +31,7 @@ public class SplayTree<AnyType extends Comparable<? super AnyType>> {
             root = newNode;
         } else {
             root = splay(x, root);
-
+            operations++;
             int compareResult = x.compareTo(root.element);
 
             if (compareResult < 0) {
@@ -115,10 +116,11 @@ public class SplayTree<AnyType extends Comparable<? super AnyType>> {
     }
 
     public boolean isEmpty() {
+        operations++;
         return root == nullNode;
     }
 
-    private BinaryNode<AnyType> header = new BinaryNode<AnyType>(null); // For splay
+    private BinaryNode<AnyType> header = new BinaryNode<AnyType>(null);
 
     private BinaryNode<AnyType> splay(AnyType x, BinaryNode<AnyType> t) {
         BinaryNode<AnyType> leftTreeMax, rightTreeMin;
@@ -133,8 +135,10 @@ public class SplayTree<AnyType extends Comparable<? super AnyType>> {
             int compareResult = x.compareTo(t.element);
 
             if (compareResult < 0) {
-                if (x.compareTo(t.left.element) < 0)
+                if (x.compareTo(t.left.element) < 0) {
                     t = rotateWithLeftChild(t);
+                    operations++;
+                }
                 if (t.left == nullNode)
                     break;
                 // Link Right
@@ -142,11 +146,12 @@ public class SplayTree<AnyType extends Comparable<? super AnyType>> {
                 rightTreeMin = t;
                 t = t.left;
             } else if (compareResult > 0) {
-                if (x.compareTo(t.right.element) > 0)
+                if (x.compareTo(t.right.element) > 0){
                     t = rotateWithRightChild(t);
+                    operations++;
+                }
                 if (t.right == nullNode)
                     break;
-                // Link Left
                 leftTreeMax.right = t;
                 leftTreeMax = t;
                 t = t.right;

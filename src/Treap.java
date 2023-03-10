@@ -103,12 +103,15 @@ public class Treap<AnyType extends Comparable<? super AnyType>> {
      * @return true if x is found.
      */
     public boolean contains(AnyType x) {
+        operationCount++;
+
         TreapNode<AnyType> current = root;
         nullNode.element = x;
 
         for (; ; ) {
             operationCount++;  // increment count variable
             int compareResult = x.compareTo(current.element);
+            operationCount++;  // increment count variable
 
             if (compareResult < 0)
                 current = current.left;
@@ -154,19 +157,25 @@ public class Treap<AnyType extends Comparable<? super AnyType>> {
      * @return the new root of the subtree.
      */
     private TreapNode<AnyType> insert(AnyType x, TreapNode<AnyType> t) {
-        if (t == nullNode)
+        if (t == nullNode) {
+            operationCount++;
             return new TreapNode<>(x, nullNode, nullNode);
-
+        }
+        operationCount++;
         int compareResult = x.compareTo(t.element);
 
         if (compareResult < 0) {
             t.left = insert(x, t.left);
-            if (t.left.priority < t.priority)
+            if (t.left.priority < t.priority) {
+                operationCount++;
                 t = rotateWithLeftChild(t);
+            }
         } else if (compareResult > 0) {
             t.right = insert(x, t.right);
-            if (t.right.priority < t.priority)
+            if (t.right.priority < t.priority) {
+                operationCount++;
                 t = rotateWithRightChild(t);
+            }
         }
         // Otherwise, it's a duplicate; do nothing
 
@@ -235,6 +244,10 @@ public class Treap<AnyType extends Comparable<? super AnyType>> {
         k1.right = k2.left;
         k2.left = k1;
         return k2;
+    }
+
+    public int getOperations() {
+        return operationCount;
     }
 
     private static class TreapNode<AnyType> {
