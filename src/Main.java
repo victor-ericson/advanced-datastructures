@@ -1,56 +1,56 @@
 import java.util.Arrays;
 import java.util.Random;
 
-public class TreeTest {
-    public static void main(String[] args) {
-        // Create sorted, reverse sorted, and unsorted data sets
-        int[] sortedDataSet = {1, 2, 3, 4, 5};
-        int[] reverseSortedDataSet = {5, 4, 3, 2, 1};
-        int[] unsortedDataSet = {3, 2, 5, 1, 4};
+public class Main {
 
-        // Create instances of SplayTree, RedBlackTree, and Treap
+    public static void main(String[] args) {
         SplayTree<Integer> splayTree = new SplayTree<>();
         RedBlackTree<Integer> redBlackTree = new RedBlackTree<>();
         Treap<Integer> treap = new Treap<>();
 
-        // Perform insert, delete, and random operations on each data set
+        int[] sortedData = generateSortedData();
+        int[] unsortedData = generateUnsortedData();
+        int[] reverseSortedData = generateReverseSortedData();
+
+        System.out.println("Splay Tree Insertions");
+        testContains(splayTree, sortedData, "sorted");
+        testContains(splayTree, unsortedData, "unsorted");
+        testContains(splayTree, reverseSortedData, "reverse sorted");
+    }
+
+    private static int[] generateSortedData() {
+        int[] data = new int[1000];
+        for (int i = 0; i < data.length; i++) {
+            data[i] = i;
+        }
+        return data;
+    }
+
+    private static int[] generateUnsortedData() {
         Random random = new Random();
-        int numOperations = 0;
-        for (int i = 0; i < sortedDataSet.length; i++) {
-            splayTree.insert(sortedDataSet[i]);
-            redBlackTree.insert(sortedDataSet[i]);
-            treap.add(sortedDataSet[i]);
-            numOperations += 3;
+        int[] data = new int[1000];
+        for (int i = 0; i < data.length; i++) {
+            data[i] = random.nextInt(1000);
         }
-        for (int i = 0; i < reverseSortedDataSet.length; i++) {
-            splayTree.delete(reverseSortedDataSet[i]);
-            redBlackTree.delete(reverseSortedDataSet[i]);
-            treap.remove(reverseSortedDataSet[i]);
-            numOperations += 3;
+        return data;
+    }
+
+    private static int[] generateReverseSortedData() {
+        int[] data = generateSortedData();
+        int[] reverseData = new int[data.length];
+        for (int i = 0; i < data.length; i++) {
+            reverseData[i] = data[data.length - i - 1];
         }
-        for (int i = 0; i < unsortedDataSet.length; i++) {
-            int randomOperation = random.nextInt(3);
-            if (randomOperation == 0) {
-                splayTree.insert(unsortedDataSet[i]);
-                redBlackTree.insert(unsortedDataSet[i]);
-                treap.add(unsortedDataSet[i]);
-                numOperations += 3;
-            } else if (randomOperation == 1) {
-                splayTree.delete(unsortedDataSet[i]);
-                redBlackTree.delete(unsortedDataSet[i]);
-                treap.remove(unsortedDataSet[i]);
-                numOperations += 3;
-            } else {
-                splayTree.find(unsortedDataSet[i]);
-                redBlackTree.contains(unsortedDataSet[i]);
-                treap.contains(unsortedDataSet[i]);
-                numOperations += 3;
-            }
+        return reverseData;
+    }
+
+    private static void testContains(SplayTree<Integer> splayTree, int[] data, String type) {
+        Arrays.stream(data).forEach(splayTree::insert);
+
+        for (int i = 0; i < data.length; i++) {
+            splayTree.contains(i);
         }
 
-        // Print the number of operations performed for each data structure
-        System.out.println("SplayTree operations: " + numOperations);
-        System.out.println("RedBlackTree operations: " + redBlackTree.getNumOperations());
-        System.out.println("Treap operations: " + treap.getNumOperations());
+        System.out.println("Dataset: " + type + ", Operations: " + splayTree.getOperations());
     }
 }

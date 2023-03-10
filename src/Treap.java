@@ -24,6 +24,7 @@ import java.util.Random;
  * @author Mark Allen Weiss
  */
 public class Treap<AnyType extends Comparable<? super AnyType>> {
+    private int operationCount;
     /**
      * Construct the treap.
      */
@@ -32,6 +33,7 @@ public class Treap<AnyType extends Comparable<? super AnyType>> {
         nullNode.left = nullNode.right = nullNode;
         nullNode.priority = Integer.MAX_VALUE;
         root = nullNode;
+        operationCount = 0;
     }
 
     /**
@@ -40,6 +42,7 @@ public class Treap<AnyType extends Comparable<? super AnyType>> {
      * @param x the item to insert.
      */
     public void insert(AnyType x) {
+        operationCount++;
         root = insert(x, root);
     }
 
@@ -49,6 +52,7 @@ public class Treap<AnyType extends Comparable<? super AnyType>> {
      * @param x the item to remove.
      */
     public void remove(AnyType x) {
+        operationCount++;
         root = remove(x, root);
     }
 
@@ -92,11 +96,18 @@ public class Treap<AnyType extends Comparable<? super AnyType>> {
      * @param x the item to search for.
      * @return true if x is found.
      */
+    /**
+     * Find an item in the tree.
+     *
+     * @param x the item to search for.
+     * @return true if x is found.
+     */
     public boolean contains(AnyType x) {
         TreapNode<AnyType> current = root;
         nullNode.element = x;
 
         for (; ; ) {
+            operationCount++;  // increment count variable
             int compareResult = x.compareTo(current.element);
 
             if (compareResult < 0)
@@ -107,6 +118,7 @@ public class Treap<AnyType extends Comparable<? super AnyType>> {
                 return current != nullNode;
         }
     }
+
 
     /**
      * Make the tree logically empty.
