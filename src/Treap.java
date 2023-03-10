@@ -157,9 +157,13 @@ public class Treap<AnyType extends Comparable<? super AnyType>> {
      * @return the new root of the subtree.
      */
     private TreapNode<AnyType> insert(AnyType x, TreapNode<AnyType> t) {
-        if (t == nullNode)
+        operationCount++;
+        if (t == nullNode) {
+            operationCount++;
             return new TreapNode<>(x, nullNode, nullNode);
+        }
 
+        operationCount++;
         int compareResult = x.compareTo(t.element);
 
         if (compareResult < 0) {
@@ -224,9 +228,11 @@ public class Treap<AnyType extends Comparable<? super AnyType>> {
      * Rotate binary tree node with left child.
      */
     private TreapNode<AnyType> rotateWithLeftChild(TreapNode<AnyType> k2) {
+        operationCount++;
         TreapNode<AnyType> k1 = k2.left;
         k2.left = k1.right;
         k1.right = k2;
+        operationCount++;
         return k1;
     }
 
@@ -234,9 +240,12 @@ public class Treap<AnyType extends Comparable<? super AnyType>> {
      * Rotate binary tree node with right child.
      */
     private TreapNode<AnyType> rotateWithRightChild(TreapNode<AnyType> k1) {
+        operationCount++;
+
         TreapNode<AnyType> k2 = k1.right;
         k1.right = k2.left;
         k2.left = k1;
+        operationCount++;
         return k2;
     }
 
