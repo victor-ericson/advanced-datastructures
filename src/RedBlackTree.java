@@ -23,14 +23,17 @@ import java.nio.BufferUnderflowException;
  * @author Mark Allen Weiss
  */
 public class RedBlackTree<AnyType extends Comparable<? super AnyType>> {
+    private int operations;
     /**
      * Construct the tree.
+     *
      */
     public RedBlackTree() {
         nullNode = new RedBlackNode<>(null);
         nullNode.left = nullNode.right = nullNode;
         header = new RedBlackNode<>(null);
         header.left = header.right = nullNode;
+        operations = 0;
     }
 
     /**
@@ -40,6 +43,7 @@ public class RedBlackTree<AnyType extends Comparable<? super AnyType>> {
      * If it is not possible for t to be header, use compareTo directly.
      */
     private int compare(AnyType item, RedBlackNode<AnyType> t) {
+        operations++;
         if (t == header)
             return 1;
         else
@@ -52,6 +56,7 @@ public class RedBlackTree<AnyType extends Comparable<? super AnyType>> {
      * @param item the item to insert.
      */
     public void insert(AnyType item) {
+        operations++;
         current = parent = grand = header;
         nullNode.element = item;
 
@@ -87,6 +92,7 @@ public class RedBlackTree<AnyType extends Comparable<? super AnyType>> {
      * @throws UnsupportedOperationException if called.
      */
     public void remove(AnyType x) {
+        operations++;
         throw new UnsupportedOperationException();
     }
 
@@ -96,14 +102,16 @@ public class RedBlackTree<AnyType extends Comparable<? super AnyType>> {
      * @return the smallest item or throw UnderflowExcepton if empty.
      */
     public AnyType findMin() {
+        operations++;
         if (isEmpty())
             throw new BufferUnderflowException();
 
         RedBlackNode<AnyType> itr = header.right;
 
-        while (itr.left != nullNode)
+        while (itr.left != nullNode){
             itr = itr.left;
-
+            operations++;
+        }
         return itr.element;
     }
 
@@ -113,13 +121,16 @@ public class RedBlackTree<AnyType extends Comparable<? super AnyType>> {
      * @return the largest item or throw UnderflowExcepton if empty.
      */
     public AnyType findMax() {
+        operations++;
         if (isEmpty())
             throw new BufferUnderflowException();
 
         RedBlackNode<AnyType> itr = header.right;
 
-        while (itr.right != nullNode)
+        while (itr.right != nullNode) {
             itr = itr.right;
+            operations++;
+        }
 
         return itr.element;
     }
@@ -131,6 +142,7 @@ public class RedBlackTree<AnyType extends Comparable<? super AnyType>> {
      * @return true if x is found; otherwise false.
      */
     public boolean contains(AnyType x) {
+        operations++;
         nullNode.element = x;
         current = header.right;
 
@@ -150,6 +162,7 @@ public class RedBlackTree<AnyType extends Comparable<? super AnyType>> {
      * Make the tree logically empty.
      */
     public void makeEmpty() {
+        operations++;
         header.right = nullNode;
     }
 
@@ -169,6 +182,7 @@ public class RedBlackTree<AnyType extends Comparable<? super AnyType>> {
      * @param t the node that roots the subtree.
      */
     private void printTree(RedBlackNode<AnyType> t) {
+        operations++;
         if (t != nullNode) {
             printTree(t.left);
             System.out.println(t.element);
@@ -192,6 +206,8 @@ public class RedBlackTree<AnyType extends Comparable<? super AnyType>> {
      * @param item the item being inserted.
      */
     private void handleReorient(AnyType item) {
+        operations++;
+
         // Do the color flip
         current.color = RED;
         current.left.color = BLACK;
@@ -219,6 +235,8 @@ public class RedBlackTree<AnyType extends Comparable<? super AnyType>> {
      * @return the root of the rotated subtree.
      */
     private RedBlackNode<AnyType> rotate(AnyType item, RedBlackNode<AnyType> parent) {
+        operations++;
+
         if (compare(item, parent) < 0)
             return parent.left = compare(item, parent.left) < 0 ?
                     rotateWithLeftChild(parent.left) :  // LL
@@ -248,7 +266,9 @@ public class RedBlackTree<AnyType extends Comparable<? super AnyType>> {
         k2.left = k1;
         return k2;
     }
-
+    public int getOperations() {
+        return operations;
+    }
     private static class RedBlackNode<AnyType> {
         // Constructors
         RedBlackNode(AnyType theElement) {
