@@ -1,7 +1,11 @@
+/*
+Testar access till frekventa element i olika träd.
+ */
+
 import java.util.Arrays;
 import java.util.Random;
 
-public class TestContains {
+public class TestFrequentAccess {
 
     public static void main(String[] args) {
 

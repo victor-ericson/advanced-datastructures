@@ -19,10 +19,10 @@ public class SplayTree<AnyType extends Comparable<? super AnyType>> {
     public void insert(AnyType x) {
         operations++;
         if (newNode == null){
+            operations++;
             newNode = new BinaryNode<>(null);
             operations++;
         }
-
         newNode.element = x;
 
 
@@ -137,6 +137,7 @@ public class SplayTree<AnyType extends Comparable<? super AnyType>> {
             if (compareResult < 0) {
                 if (x.compareTo(t.left.element) < 0) {
                     t = rotateWithLeftChild(t);
+                    //sätter operations till +1 här för att rotate är en statisk metod
                     operations++;
                 }
                 if (t.left == nullNode)
@@ -148,6 +149,7 @@ public class SplayTree<AnyType extends Comparable<? super AnyType>> {
             } else if (compareResult > 0) {
                 if (x.compareTo(t.right.element) > 0){
                     t = rotateWithRightChild(t);
+                    //sätter operations till +1 här för att rotate är en statisk metod
                     operations++;
                 }
                 if (t.right == nullNode)

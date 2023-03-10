@@ -1,7 +1,10 @@
+/*
+Testar en blandning av insert och access till olika träd.
+ */
 import java.util.Arrays;
 import java.util.Random;
 
-public class TestInsert {
+public class TestSearchAndContains {
 
     public static void main(String[] args) {
 
@@ -14,23 +17,23 @@ public class TestInsert {
         int[] reverseSortedData = generateReverseSortedData();
 
         System.out.println("Splay Tree Inserts");
-        testInsertForSplay(splayTree, sortedData, "sorted");
-        testInsertForSplay(splayTree, unsortedData, "unsorted");
-        testInsertForSplay(splayTree, reverseSortedData, "reverse sorted");
+        testSearchForSplay(splayTree, sortedData, "sorted");
+        testSearchForSplay(splayTree, unsortedData, "unsorted");
+        testSearchForSplay(splayTree, reverseSortedData, "reverse sorted");
         System.out.println();
         System.out.println("Red Black Tree Inserts");
-        testInsertForRedBlack(redBlackTree, sortedData, "sorted");
-        testInsertForRedBlack(redBlackTree, unsortedData, "unsorted");
-        testInsertForRedBlack(redBlackTree, reverseSortedData, "reverse sorted");
+        testSearchForRedBlack(redBlackTree, sortedData, "sorted");
+        testSearchForRedBlack(redBlackTree, unsortedData, "unsorted");
+        testSearchForRedBlack(redBlackTree, reverseSortedData, "reverse sorted");
         System.out.println();
         System.out.println("Treap Inserts");
-        testInsertForTreap(treap, sortedData, "sorted");
-        testInsertForTreap(treap, unsortedData, "unsorted");
-        testInsertForTreap(treap, reverseSortedData, "reverse sorted");
+        testSearchForTreap(treap, sortedData, "sorted");
+        testSearchForTreap(treap, unsortedData, "unsorted");
+        testSearchForTreap(treap, reverseSortedData, "reverse sorted");
     }
 
     private static int[] generateSortedData() {
-        int[] data = new int[100];
+        int[] data = new int[150];
         for (int i = 0; i < data.length; i++) {
             data[i] = i;
         }
@@ -39,9 +42,9 @@ public class TestInsert {
 
     private static int[] generateUnsortedData() {
         Random random = new Random();
-        int[] data = new int[100];
+        int[] data = new int[150];
         for (int i = 0; i < data.length; i++) {
-            data[i] = random.nextInt(100);
+            data[i] = random.nextInt(50);
         }
         return data;
     }
@@ -55,33 +58,42 @@ public class TestInsert {
         return reverseData;
     }
 
-    private static void testInsertForSplay(SplayTree<Integer> splayTree, int[] data, String type) {
+    private static void testSearchForSplay(SplayTree<Integer> splayTree, int[] data, String type) {
         Arrays.stream(data).forEach(splayTree::insert);
 
-        for (int i = 0; i < data.length; i++) {
-            int random = new Random(100).nextInt();
-            splayTree.insert(random);
-            }
+        splayTree.insert(5);
+        splayTree.insert(25);
+        splayTree.contains(25);
+        splayTree.contains(5);
+//        splayTree.insert(44);
+//        splayTree.contains(44);
+
         System.out.println("Dataset: " + type + ", Operations: " + splayTree.getOperations());
     }
 
-    private static void testInsertForRedBlack(RedBlackTree<Integer> redBlackTree, int[] data, String type) {
+    private static void testSearchForRedBlack(RedBlackTree<Integer> redBlackTree, int[] data, String type) {
         Arrays.stream(data).forEach(redBlackTree::insert);
 
-        for (int i = 0; i < data.length; i++) {
-            int random = new Random(100).nextInt();
-            redBlackTree.insert(random);
-        }
+        redBlackTree.insert(5);
+        redBlackTree.insert(25);
+        redBlackTree.contains(25);
+        redBlackTree.contains(5);
+//        redBlackTree.insert(44);
+//        redBlackTree.contains(44);
+
         System.out.println("Dataset: " + type + ", Operations: " + redBlackTree.getOperations());
     }
 
-    private static void testInsertForTreap(Treap<Integer> treap, int[] data, String type) {
+    private static void testSearchForTreap(Treap<Integer> treap, int[] data, String type) {
         Arrays.stream(data).forEach(treap::insert);
 
-        for (int i = 0; i < data.length; i++) {
-            int random = new Random(100).nextInt();
-            treap.insert(random);
-        }
+        treap.insert(5);
+        treap.insert(25);
+        treap.contains(25);
+        treap.contains(5);
+//        treap.insert(44);
+//        treap.contains(44);
+
         System.out.println("Dataset: " + type + ", Operations: " + treap.getOperations());
     }
 }

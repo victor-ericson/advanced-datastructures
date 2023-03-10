@@ -24,9 +24,9 @@ import java.nio.BufferUnderflowException;
  */
 public class RedBlackTree<AnyType extends Comparable<? super AnyType>> {
     private int operations;
+
     /**
      * Construct the tree.
-     *
      */
     public RedBlackTree() {
         nullNode = new RedBlackNode<>(null);
@@ -43,7 +43,6 @@ public class RedBlackTree<AnyType extends Comparable<? super AnyType>> {
      * If it is not possible for t to be header, use compareTo directly.
      */
     private int compare(AnyType item, RedBlackNode<AnyType> t) {
-        operations++;
         if (t == header)
             return 1;
         else
@@ -68,8 +67,9 @@ public class RedBlackTree<AnyType extends Comparable<? super AnyType>> {
                     current.left : current.right;
 
             // Check if two red children; fix if so
-            if (current.left.color == RED && current.right.color == RED)
+            if (current.left.color == RED && current.right.color == RED) {
                 handleReorient(item);
+            }
         }
 
         // Insertion fails if already present
@@ -108,7 +108,7 @@ public class RedBlackTree<AnyType extends Comparable<? super AnyType>> {
 
         RedBlackNode<AnyType> itr = header.right;
 
-        while (itr.left != nullNode){
+        while (itr.left != nullNode) {
             itr = itr.left;
             operations++;
         }
@@ -147,14 +147,16 @@ public class RedBlackTree<AnyType extends Comparable<? super AnyType>> {
         current = header.right;
 
         for (; ; ) {
-            if (x.compareTo(current.element) < 0)
+            operations++;
+            if (x.compareTo(current.element) < 0) {
                 current = current.left;
-            else if (x.compareTo(current.element) > 0)
+            } else if (x.compareTo(current.element) > 0) {
                 current = current.right;
-            else if (current != nullNode)
+            } else if (current != nullNode) {
                 return true;
-            else
+            } else {
                 return false;
+            }
         }
     }
 
@@ -207,7 +209,6 @@ public class RedBlackTree<AnyType extends Comparable<? super AnyType>> {
      */
     private void handleReorient(AnyType item) {
         operations++;
-
         // Do the color flip
         current.color = RED;
         current.left.color = BLACK;
@@ -236,7 +237,6 @@ public class RedBlackTree<AnyType extends Comparable<? super AnyType>> {
      */
     private RedBlackNode<AnyType> rotate(AnyType item, RedBlackNode<AnyType> parent) {
         operations++;
-
         if (compare(item, parent) < 0)
             return parent.left = compare(item, parent.left) < 0 ?
                     rotateWithLeftChild(parent.left) :  // LL
@@ -251,6 +251,7 @@ public class RedBlackTree<AnyType extends Comparable<? super AnyType>> {
      * Rotate binary tree node with left child.
      */
     private RedBlackNode<AnyType> rotateWithLeftChild(RedBlackNode<AnyType> k2) {
+        operations++;
         RedBlackNode<AnyType> k1 = k2.left;
         k2.left = k1.right;
         k1.right = k2;
@@ -261,14 +262,17 @@ public class RedBlackTree<AnyType extends Comparable<? super AnyType>> {
      * Rotate binary tree node with right child.
      */
     private RedBlackNode<AnyType> rotateWithRightChild(RedBlackNode<AnyType> k1) {
+        operations++;
         RedBlackNode<AnyType> k2 = k1.right;
         k1.right = k2.left;
         k2.left = k1;
         return k2;
     }
+
     public int getOperations() {
         return operations;
     }
+
     private static class RedBlackNode<AnyType> {
         // Constructors
         RedBlackNode(AnyType theElement) {
