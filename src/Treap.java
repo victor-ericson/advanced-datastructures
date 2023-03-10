@@ -103,12 +103,15 @@ public class Treap<AnyType extends Comparable<? super AnyType>> {
      * @return true if x is found.
      */
     public boolean contains(AnyType x) {
+        operationCount++;
+
         TreapNode<AnyType> current = root;
         nullNode.element = x;
 
         for (; ; ) {
             operationCount++;  // increment count variable
             int compareResult = x.compareTo(current.element);
+            operationCount++;  // increment count variable
 
             if (compareResult < 0)
                 current = current.left;
