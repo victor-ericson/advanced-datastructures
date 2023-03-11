@@ -1,4 +1,10 @@
 /*
+Victor Ericson vier1798
+Filip Lingefelt fili8261
+Samuel Bakall saba9460
+ */
+
+/*
 Testar access till frekventa element i olika träd.
 Här bör splayträdet generellt vara snabbast då access till frekventa element är dess styrka.
  */

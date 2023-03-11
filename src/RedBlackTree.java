@@ -1,3 +1,9 @@
+/*
+Victor Ericson vier1798
+Filip Lingefelt fili8261
+Samuel Bakall saba9460
+ */
+
 // RedBlackTree class
 //
 // CONSTRUCTION: with no parameters
@@ -62,6 +68,7 @@ public class RedBlackTree<AnyType extends Comparable<? super AnyType>> {
         nullNode.element = item;
 
         while (compare(item, current) != 0) {
+            operations++;
             great = grand;
             grand = parent;
             parent = current;

@@ -1,4 +1,9 @@
 /*
+Victor Ericson vier1798
+Filip Lingefelt fili8261
+Samuel Bakall saba9460
+ */
+/*
 Här ska treap ha minst antal rotations då det är ett slumpmässigt träd och utför därför inga rotationer vid access och insertions.
  */
 
@@ -44,21 +49,19 @@ public class TestRotations {
     }
 
     private static void testRotationsSplay(SplayTree<Integer> splayTree, int[] data, String type) {
+        splayTree.resetRotations();
         Arrays.stream(data).forEach(splayTree::insert);
 
-        splayTree.resetRotations();
         for (int i = 0; i < data.length; i++) {
             splayTree.insert(i);
         }
         splayTree.insert(5);
         splayTree.insert(25);
-        splayTree.contains(25);
-        splayTree.contains(5);
         splayTree.insert(44);
-        splayTree.contains(44);
+        splayTree.insert(50);
+        splayTree.insert(49);
 
         System.out.println("Dataset: " + type + ", Rotations: " + splayTree.getRotations());
-        splayTree.resetRotations();
     }
 
     private static void testRotationsRedBlack(RedBlackTree<Integer> redBlackTree, int[] data, String type) {
@@ -70,13 +73,12 @@ public class TestRotations {
         }
         redBlackTree.insert(5);
         redBlackTree.insert(25);
-        redBlackTree.contains(25);
-        redBlackTree.contains(5);
         redBlackTree.insert(44);
-        redBlackTree.contains(44);
+        redBlackTree.insert(50);
+        redBlackTree.insert(49);
+
 
         System.out.println("Dataset: " + type + ", Rotations: " + redBlackTree.getRotations());
-        redBlackTree.resetRotations();
     }
 
     private static void testRotationsTreap(Treap<Integer> treap, int[] data, String type) {
@@ -89,12 +91,10 @@ public class TestRotations {
         }
         treap.insert(5);
         treap.insert(25);
-        treap.contains(25);
-        treap.contains(5);
         treap.insert(44);
-        treap.contains(44);
+        treap.insert(50);
+        treap.insert(49);
 
         System.out.println("Dataset: " + type + ", Rotations: " + treap.getRotations());
-        treap.resetRotations();
     }
 }

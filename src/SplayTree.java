@@ -1,3 +1,9 @@
+/*
+Victor Ericson vier1798
+Filip Lingefelt fili8261
+Samuel Bakall saba9460
+ */
+
 public class SplayTree<AnyType extends Comparable<? super AnyType>> {
 
 

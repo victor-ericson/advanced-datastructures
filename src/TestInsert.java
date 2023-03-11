@@ -1,4 +1,10 @@
 /*
+Victor Ericson vier1798
+Filip Lingefelt fili8261
+Samuel Bakall saba9460
+ */
+
+/*
 Testar en blandning av insert och access till olika träd.
 Här bör red-black tree vara snabbast då dess stabila balansering gör att den är snabbast vid insert.
 
@@ -15,54 +21,36 @@ public class TestInsert {
         RedBlackTree<Integer> redBlackTree = new RedBlackTree<>();
         Treap<Integer> treap = new Treap<>();
 
-        int[] sortedData = generateSortedData();
-        int[] unsortedData = generateUnsortedData();
-        int[] reverseSortedData = generateReverseSortedData();
+        int[] smallSet = generateSortedData(100);
+        int[] mediumSet = generateSortedData(500);
+        int[] largeSet = generateSortedData(1000);
 
         System.out.println("Splay Tree Inserts");
-        testSearchForSplay(splayTree, sortedData, "sorted");
-        testSearchForSplay(splayTree, unsortedData, "unsorted");
-        testSearchForSplay(splayTree, reverseSortedData, "reverse sorted");
+        testSearchForSplay(splayTree, smallSet, "small");
+        testSearchForSplay(splayTree, mediumSet, "medium");
+        testSearchForSplay(splayTree, largeSet, "large");
 
         System.out.println();
 
         System.out.println("Red Black Tree Inserts");
-        testSearchForRedBlack(redBlackTree, sortedData, "sorted");
-        testSearchForRedBlack(redBlackTree, unsortedData, "unsorted");
-        testSearchForRedBlack(redBlackTree, reverseSortedData, "reverse sorted");
+        testSearchForRedBlack(redBlackTree, smallSet, "small");
+        testSearchForRedBlack(redBlackTree, mediumSet, "medium");
+        testSearchForRedBlack(redBlackTree, largeSet, "large");
 
         System.out.println();
 
         System.out.println("Treap Inserts");
-        testSearchForTreap(treap, sortedData, "sorted");
-        testSearchForTreap(treap, unsortedData, "unsorted");
-        testSearchForTreap(treap, reverseSortedData, "reverse sorted");
+        testSearchForTreap(treap, smallSet, "small");
+        testSearchForTreap(treap, mediumSet, "medium");
+        testSearchForTreap(treap, largeSet, "large");
     }
 
-    private static int[] generateSortedData() {
-        int[] data = new int[150];
+    private static int[] generateSortedData(int size) {
+        int[] data = new int[size];
         for (int i = 0; i < data.length; i++) {
             data[i] = i;
         }
         return data;
-    }
-
-    private static int[] generateUnsortedData() {
-        Random random = new Random();
-        int[] data = new int[150];
-        for (int i = 0; i < data.length; i++) {
-            data[i] = random.nextInt(150);
-        }
-        return data;
-    }
-
-    private static int[] generateReverseSortedData() {
-        int[] data = generateSortedData();
-        int[] reverseData = new int[data.length];
-        for (int i = 0; i < data.length; i++) {
-            reverseData[i] = data[data.length - i - 1];
-        }
-        return reverseData;
     }
 
     private static void testSearchForSplay(SplayTree<Integer> splayTree, int[] data, String type) {
@@ -70,21 +58,28 @@ public class TestInsert {
 
         splayTree.resetOperations();
 
-        splayTree.insert(5);
-        splayTree.insert(25);
-        splayTree.insert(44);
+        int[] randomNumbers = new int[50];
+        Random random = new Random();
+        for (int i = 0; i < randomNumbers.length; i++) {
+            randomNumbers[i] = random.nextInt(50);
+        }
+        Arrays.stream(randomNumbers).forEach(splayTree::insert);
 
         System.out.println("Dataset: " + type + ", Operations: " + splayTree.getOperations());
     }
 
     private static void testSearchForRedBlack(RedBlackTree<Integer> redBlackTree, int[] data, String type) {
         Arrays.stream(data).forEach(redBlackTree::insert);
-
         redBlackTree.resetOperations();
+        // Insert all random numbers at once outside the loop
+        int[] randomNumbers = new int[50];
+        Random random = new Random();
+        for (int i = 0; i < randomNumbers.length; i++) {
+            randomNumbers[i] = random.nextInt(50);
+        }
+        Arrays.stream(randomNumbers).forEach(redBlackTree::insert);
 
-        redBlackTree.insert(5);
-        redBlackTree.insert(25);
-        redBlackTree.insert(44);
+
 
         System.out.println("Dataset: " + type + ", Operations: " + redBlackTree.getOperations());
     }
@@ -93,10 +88,12 @@ public class TestInsert {
         Arrays.stream(data).forEach(treap::insert);
 
         treap.resetOperations();
-
-        treap.insert(5);
-        treap.insert(25);
-        treap.insert(44);
+        int[] randomNumbers = new int[50];
+        Random random = new Random();
+        for (int i = 0; i < randomNumbers.length; i++) {
+            randomNumbers[i] = random.nextInt(50);
+        }
+        Arrays.stream(randomNumbers).forEach(treap::insert);
 
         System.out.println("Dataset: " + type + ", Operations: " + treap.getOperations());
     }
