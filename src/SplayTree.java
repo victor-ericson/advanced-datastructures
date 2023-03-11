@@ -34,7 +34,6 @@ public class SplayTree<AnyType extends Comparable<? super AnyType>> {
         if (newNode == null){
             operations++;
             newNode = new BinaryNode<>(null);
-            operations++;
         }
         newNode.element = x;
 

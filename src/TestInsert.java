@@ -7,7 +7,7 @@ Här bör red-black tree vara snabbast då dess stabila balansering gör att den
 import java.util.Arrays;
 import java.util.Random;
 
-public class TestInsertAndContains {
+public class TestInsert {
 
     public static void main(String[] args) {
 
@@ -72,10 +72,7 @@ public class TestInsertAndContains {
 
         splayTree.insert(5);
         splayTree.insert(25);
-        splayTree.contains(25);
-        splayTree.contains(5);
         splayTree.insert(44);
-        splayTree.contains(44);
 
         System.out.println("Dataset: " + type + ", Operations: " + splayTree.getOperations());
     }
@@ -87,10 +84,7 @@ public class TestInsertAndContains {
 
         redBlackTree.insert(5);
         redBlackTree.insert(25);
-        redBlackTree.contains(25);
-        redBlackTree.contains(5);
         redBlackTree.insert(44);
-        redBlackTree.contains(44);
 
         System.out.println("Dataset: " + type + ", Operations: " + redBlackTree.getOperations());
     }
@@ -102,10 +96,7 @@ public class TestInsertAndContains {
 
         treap.insert(5);
         treap.insert(25);
-        treap.contains(25);
-        treap.contains(5);
         treap.insert(44);
-        treap.contains(44);
 
         System.out.println("Dataset: " + type + ", Operations: " + treap.getOperations());
     }
