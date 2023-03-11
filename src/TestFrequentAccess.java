@@ -1,5 +1,6 @@
 /*
 Testar access till frekventa element i olika träd.
+Här bör splayträdet generellt vara snabbast då access till frekventa element är dess styrka.
  */
 
 import java.util.Arrays;
@@ -21,12 +22,16 @@ public class TestFrequentAccess {
         testContainsForSplay(splayTree, sortedData, "sorted");
         testContainsForSplay(splayTree, unsortedData, "unsorted");
         testContainsForSplay(splayTree, reverseSortedData, "reverse sorted");
+
         System.out.println();
+
         System.out.println("Red Black Tree Searches");
         testContainsForRedBlack(redBlackTree, sortedData, "sorted");
         testContainsForRedBlack(redBlackTree, unsortedData, "unsorted");
         testContainsForRedBlack(redBlackTree, reverseSortedData, "reverse sorted");
+
         System.out.println();
+
         System.out.println("Treap Searches");
         testContainsForTreap(treap, sortedData, "sorted");
         testContainsForTreap(treap, unsortedData, "unsorted");

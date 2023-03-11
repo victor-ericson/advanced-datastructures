@@ -1,10 +1,13 @@
 /*
 Testar en blandning av insert och access till olika träd.
+Här bör red-black tree vara snabbast då dess stabila balansering gör att den är snabbast vid insert.
+
  */
+
 import java.util.Arrays;
 import java.util.Random;
 
-public class TestSearchAndContains {
+public class TestInsertAndContains {
 
     public static void main(String[] args) {
 
@@ -20,12 +23,16 @@ public class TestSearchAndContains {
         testSearchForSplay(splayTree, sortedData, "sorted");
         testSearchForSplay(splayTree, unsortedData, "unsorted");
         testSearchForSplay(splayTree, reverseSortedData, "reverse sorted");
+
         System.out.println();
+
         System.out.println("Red Black Tree Inserts");
         testSearchForRedBlack(redBlackTree, sortedData, "sorted");
         testSearchForRedBlack(redBlackTree, unsortedData, "unsorted");
         testSearchForRedBlack(redBlackTree, reverseSortedData, "reverse sorted");
+
         System.out.println();
+
         System.out.println("Treap Inserts");
         testSearchForTreap(treap, sortedData, "sorted");
         testSearchForTreap(treap, unsortedData, "unsorted");
@@ -62,12 +69,13 @@ public class TestSearchAndContains {
         Arrays.stream(data).forEach(splayTree::insert);
 
         splayTree.resetOperations();
+
         splayTree.insert(5);
         splayTree.insert(25);
         splayTree.contains(25);
         splayTree.contains(5);
-//        splayTree.insert(44);
-//        splayTree.contains(44);
+        splayTree.insert(44);
+        splayTree.contains(44);
 
         System.out.println("Dataset: " + type + ", Operations: " + splayTree.getOperations());
     }
@@ -76,6 +84,7 @@ public class TestSearchAndContains {
         Arrays.stream(data).forEach(redBlackTree::insert);
 
         redBlackTree.resetOperations();
+
         redBlackTree.insert(5);
         redBlackTree.insert(25);
         redBlackTree.contains(25);
@@ -90,6 +99,7 @@ public class TestSearchAndContains {
         Arrays.stream(data).forEach(treap::insert);
 
         treap.resetOperations();
+
         treap.insert(5);
         treap.insert(25);
         treap.contains(25);

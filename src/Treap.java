@@ -114,7 +114,6 @@ public class Treap<AnyType extends Comparable<? super AnyType>> {
             operations++;  // increment count variable
             int compareResult = x.compareTo(current.element);
             operations++;  // increment count variable
-
             if (compareResult < 0)
                 current = current.left;
             else if (compareResult > 0)

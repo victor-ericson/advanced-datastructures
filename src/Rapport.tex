@@ -1,0 +1,80 @@
+% The format (A4, 10pt, one sided) should NOT be changed.
+\documentclass[a4paper,10pt,oneside]{article}
+
+% The package babel is loaded set up for Swedish with Swedish
+% hyphenation,replaces "Contents" with "Innehållsförteckning,
+% "References" with "Litteraturförteckning", etc.
+\usepackage[swedish]{babel}
+
+\usepackage[T1]{fontenc}
+
+% The package "inputenc" lets us specify what character encoding
+% has been used to save the .tex file. Make sure you set it up
+% with the right character encoding, otherwise ÅÄÖ might look
+% wrong, or possibly the document won't compile at all.
+\usepackage[utf8]{inputenc}     % Most likely right nowadays,
+% might even be standard and not necessary
+% \usepackage[latin1]{inputenc} % Possibly right if you use Windows
+% Other alternatives are available, but much less likely to be used
+
+% The packages listed below are optional and can be removed if you
+% don't use them
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{ifthen}
+\usepackage{listings}
+
+% These two lines set up options for the listings package and
+% can be removed if you don't use it, or changed if you, e.g,
+% use another language than Java.
+% For more information about the listings package see:
+% ftp://ftp.tex.ac.uk/tex-archive/macros/latex/contrib/listings/listings.pdf
+\def \lstlistingname {Kodexempel}
+\lstset{language=Java,tabsize=3,numbers=left,frame=L,floatplacement=hbtp}
+
+
+\usepackage{ifpdf}
+\ifpdf
+\usepackage[hidelinks]{hyperref}
+\else
+\usepackage{url}
+\fi
+
+% Ändra inte på titeln
+\title{Tema 9: Jämförelse av datastrukturer}
+
+% Write the name and user namn for all participants in the group here.
+% Separate persons with \and
+\author{Victor Ericson \url{vier1798} \and Filip Lingefelt \url{fili8261} \and Samuel Bakall \url{saba9460}}
+
+\begin{document}
+
+% Do NOT change the title format in any way, especially not to place it on
+% a separate page. Rememeber that you have a *MAXIMUM* of two pages, including
+% title...
+    \maketitle
+    \section{Test 1 - Frekvent access till samma element}
+    För det första testet valde vi att testa vad som skulle hända om vi för tre olika dataset bad om access till ett litet antal element ett flertal gånger. Detta test grundar sig i att jämföra Splayträds fundamentala egenskap om att förflytta de noder som frekvent accessas till toppen av ett träd, då det i genomsnittliga fall bör kräva betydligt färre jämförelser än vad som krävs för rödsvarta träd och treaps. Medan denna typ av struktur kan vara väldigt kostsam givet att det element som ska accessas inte görs väldigt ofta, och att det är jämn spridning för hur ofta åtkomst krävs till respektive element. Här följer resultatet för detta test:
+    \subsection{}
+    Splay Tree Searches
+    Dataset: sorted, Operations: 699
+    Dataset: unsorted, Operations: 604
+    Dataset: reverse sorted, Operations: 600
+
+    Red Black Tree Searches
+    Dataset: sorted, Operations: 1600
+    Dataset: unsorted, Operations: 1600
+    Dataset: reverse sorted, Operations: 1600
+
+    Treap Searches
+    Dataset: sorted, Operations: 3000
+    Dataset: unsorted, Operations: 3000
+    Dataset: reverse sorted, Operations: 3000
+% Here the actual report starts.
+    \section{Test 2 - Test av kostnad för Insert och Contains}
+
+% It is permitted to add references, but the space these use *WILL* be included
+% in the page count, so don't do it unless you have to. Most likely you will have
+% no need for them.
+
+\end{document}
