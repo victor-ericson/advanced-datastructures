@@ -14,7 +14,7 @@ public class TestRotations {
 
     public static void main(String[] args) {
         int[] smallData = generateRandomData(1000);
-        int[] mediumData = generateRandomData(2000);
+        int[] mediumData = generateRandomData(10000);
         int[] largeData = generateRandomData(3000);
 
         SplayTree<Integer> splayTree = new SplayTree<>();
@@ -42,9 +42,11 @@ public class TestRotations {
     }
 
     private static int[] generateRandomData(int size) {
-        int random = new Random().nextInt();
         int[] data = new int[size];
-        Arrays.fill(data, random);
+        Random random = new Random();
+        for (int i = 0; i < size; i++) {
+            data[i] = random.nextInt(1000);
+        }
         return data;
     }
 

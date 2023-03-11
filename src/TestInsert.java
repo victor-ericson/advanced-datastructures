@@ -22,8 +22,8 @@ public class TestInsert {
         Treap<Integer> treap = new Treap<>();
 
         int[] smallSet = generateSortedData(100);
-        int[] mediumSet = generateSortedData(500);
-        int[] largeSet = generateSortedData(1000);
+        int[] mediumSet = generateSortedData(200);
+        int[] largeSet = generateSortedData(300);
 
         System.out.println("Splay Tree Inserts");
         testSearchForSplay(splayTree, smallSet, "small");
