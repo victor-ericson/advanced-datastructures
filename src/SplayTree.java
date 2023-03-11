@@ -5,12 +5,18 @@ public class SplayTree<AnyType extends Comparable<? super AnyType>> {
         return operations;
     }
 
+    public int getRotations(){
+        return rotations;
+    }
+
     private int operations;
+    private int rotations;
     public SplayTree() {
         nullNode = new BinaryNode<AnyType>(null);
         nullNode.left = nullNode.right = nullNode;
         root = nullNode;
         operations = 0;
+        rotations = 0;
 
     }
 
@@ -137,6 +143,7 @@ public class SplayTree<AnyType extends Comparable<? super AnyType>> {
             if (compareResult < 0) {
                 if (x.compareTo(t.left.element) < 0) {
                     t = rotateWithLeftChild(t);
+                    rotations++;
                     //sätter operations till +1 här för att rotate är en statisk metod
                     operations++;
                 }
@@ -149,6 +156,7 @@ public class SplayTree<AnyType extends Comparable<? super AnyType>> {
             } else if (compareResult > 0) {
                 if (x.compareTo(t.right.element) > 0){
                     t = rotateWithRightChild(t);
+                    rotations++;
                     //sätter operations till +1 här för att rotate är en statisk metod
                     operations++;
                 }

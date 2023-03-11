@@ -44,7 +44,7 @@ public class TestSearchAndContains {
         Random random = new Random();
         int[] data = new int[150];
         for (int i = 0; i < data.length; i++) {
-            data[i] = random.nextInt(50);
+            data[i] = random.nextInt(150);
         }
         return data;
     }
@@ -78,8 +78,8 @@ public class TestSearchAndContains {
         redBlackTree.insert(25);
         redBlackTree.contains(25);
         redBlackTree.contains(5);
-//        redBlackTree.insert(44);
-//        redBlackTree.contains(44);
+        redBlackTree.insert(44);
+        redBlackTree.contains(44);
 
         System.out.println("Dataset: " + type + ", Operations: " + redBlackTree.getOperations());
     }
@@ -91,8 +91,8 @@ public class TestSearchAndContains {
         treap.insert(25);
         treap.contains(25);
         treap.contains(5);
-//        treap.insert(44);
-//        treap.contains(44);
+        treap.insert(44);
+        treap.contains(44);
 
         System.out.println("Dataset: " + type + ", Operations: " + treap.getOperations());
     }

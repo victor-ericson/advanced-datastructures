@@ -24,7 +24,8 @@ import java.util.Random;
  * @author Mark Allen Weiss
  */
 public class Treap<AnyType extends Comparable<? super AnyType>> {
-    private int operationCount;
+    private int operations;
+    private int rotations;
     /**
      * Construct the treap.
      */
@@ -33,7 +34,8 @@ public class Treap<AnyType extends Comparable<? super AnyType>> {
         nullNode.left = nullNode.right = nullNode;
         nullNode.priority = Integer.MAX_VALUE;
         root = nullNode;
-        operationCount = 0;
+        operations = 0;
+        rotations = 0;
     }
 
     /**
@@ -42,7 +44,7 @@ public class Treap<AnyType extends Comparable<? super AnyType>> {
      * @param x the item to insert.
      */
     public void insert(AnyType x) {
-        operationCount++;
+        operations++;
         root = insert(x, root);
     }
 
@@ -52,7 +54,7 @@ public class Treap<AnyType extends Comparable<? super AnyType>> {
      * @param x the item to remove.
      */
     public void remove(AnyType x) {
-        operationCount++;
+        operations++;
         root = remove(x, root);
     }
 
@@ -103,15 +105,15 @@ public class Treap<AnyType extends Comparable<? super AnyType>> {
      * @return true if x is found.
      */
     public boolean contains(AnyType x) {
-        operationCount++;
+        operations++;
 
         TreapNode<AnyType> current = root;
         nullNode.element = x;
 
         for (; ; ) {
-            operationCount++;  // increment count variable
+            operations++;  // increment count variable
             int compareResult = x.compareTo(current.element);
-            operationCount++;  // increment count variable
+            operations++;  // increment count variable
 
             if (compareResult < 0)
                 current = current.left;
@@ -158,22 +160,22 @@ public class Treap<AnyType extends Comparable<? super AnyType>> {
      */
     private TreapNode<AnyType> insert(AnyType x, TreapNode<AnyType> t) {
         if (t == nullNode) {
-            operationCount++;
+            operations++;
             return new TreapNode<>(x, nullNode, nullNode);
         }
-        operationCount++;
+        operations++;
         int compareResult = x.compareTo(t.element);
 
         if (compareResult < 0) {
             t.left = insert(x, t.left);
             if (t.left.priority < t.priority) {
-                operationCount++;
+                operations++;
                 t = rotateWithLeftChild(t);
             }
         } else if (compareResult > 0) {
             t.right = insert(x, t.right);
             if (t.right.priority < t.priority) {
-                operationCount++;
+                operations++;
                 t = rotateWithRightChild(t);
             }
         }
@@ -230,6 +232,7 @@ public class Treap<AnyType extends Comparable<? super AnyType>> {
      * Rotate binary tree node with left child.
      */
     private TreapNode<AnyType> rotateWithLeftChild(TreapNode<AnyType> k2) {
+        rotations++;
         TreapNode<AnyType> k1 = k2.left;
         k2.left = k1.right;
         k1.right = k2;
@@ -240,6 +243,7 @@ public class Treap<AnyType extends Comparable<? super AnyType>> {
      * Rotate binary tree node with right child.
      */
     private TreapNode<AnyType> rotateWithRightChild(TreapNode<AnyType> k1) {
+        rotations++;
         TreapNode<AnyType> k2 = k1.right;
         k1.right = k2.left;
         k2.left = k1;
@@ -247,7 +251,11 @@ public class Treap<AnyType extends Comparable<? super AnyType>> {
     }
 
     public int getOperations() {
-        return operationCount;
+        return operations;
+    }
+
+    public int getRotations() {
+        return rotations;
     }
 
     private static class TreapNode<AnyType> {

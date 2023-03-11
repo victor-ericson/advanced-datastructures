@@ -24,6 +24,7 @@ import java.nio.BufferUnderflowException;
  */
 public class RedBlackTree<AnyType extends Comparable<? super AnyType>> {
     private int operations;
+    private int rotations;
 
     /**
      * Construct the tree.
@@ -34,6 +35,7 @@ public class RedBlackTree<AnyType extends Comparable<? super AnyType>> {
         header = new RedBlackNode<>(null);
         header.left = header.right = nullNode;
         operations = 0;
+        rotations = 0;
     }
 
     /**
@@ -237,6 +239,7 @@ public class RedBlackTree<AnyType extends Comparable<? super AnyType>> {
      */
     private RedBlackNode<AnyType> rotate(AnyType item, RedBlackNode<AnyType> parent) {
         operations++;
+        rotations++;
         if (compare(item, parent) < 0)
             return parent.left = compare(item, parent.left) < 0 ?
                     rotateWithLeftChild(parent.left) :  // LL
@@ -252,6 +255,7 @@ public class RedBlackTree<AnyType extends Comparable<? super AnyType>> {
      */
     private RedBlackNode<AnyType> rotateWithLeftChild(RedBlackNode<AnyType> k2) {
         operations++;
+        rotations++;
         RedBlackNode<AnyType> k1 = k2.left;
         k2.left = k1.right;
         k1.right = k2;
@@ -263,6 +267,7 @@ public class RedBlackTree<AnyType extends Comparable<? super AnyType>> {
      */
     private RedBlackNode<AnyType> rotateWithRightChild(RedBlackNode<AnyType> k1) {
         operations++;
+        rotations++;
         RedBlackNode<AnyType> k2 = k1.right;
         k1.right = k2.left;
         k2.left = k1;
@@ -271,6 +276,10 @@ public class RedBlackTree<AnyType extends Comparable<? super AnyType>> {
 
     public int getOperations() {
         return operations;
+    }
+
+    public int getRotations() {
+        return rotations;
     }
 
     private static class RedBlackNode<AnyType> {
