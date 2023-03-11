@@ -61,6 +61,7 @@ public class TestSearchAndContains {
     private static void testSearchForSplay(SplayTree<Integer> splayTree, int[] data, String type) {
         Arrays.stream(data).forEach(splayTree::insert);
 
+        splayTree.resetOperations();
         splayTree.insert(5);
         splayTree.insert(25);
         splayTree.contains(25);
@@ -74,6 +75,7 @@ public class TestSearchAndContains {
     private static void testSearchForRedBlack(RedBlackTree<Integer> redBlackTree, int[] data, String type) {
         Arrays.stream(data).forEach(redBlackTree::insert);
 
+        redBlackTree.resetOperations();
         redBlackTree.insert(5);
         redBlackTree.insert(25);
         redBlackTree.contains(25);
@@ -87,6 +89,7 @@ public class TestSearchAndContains {
     private static void testSearchForTreap(Treap<Integer> treap, int[] data, String type) {
         Arrays.stream(data).forEach(treap::insert);
 
+        treap.resetOperations();
         treap.insert(5);
         treap.insert(25);
         treap.contains(25);

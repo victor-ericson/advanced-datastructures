@@ -62,6 +62,8 @@ public class TestFrequentAccess {
     private static void testContainsForSplay(SplayTree<Integer> splayTree, int[] data, String type) {
         Arrays.stream(data).forEach(splayTree::insert);
 
+        splayTree.resetOperations();
+
         for (int i = 0; i < 10; i++) {
             int random = new Random(10).nextInt();
             for (int j = 0; j < 20; j++) {
@@ -74,6 +76,8 @@ public class TestFrequentAccess {
     private static void testContainsForRedBlack(RedBlackTree<Integer> redBlackTree, int[] data, String type) {
         Arrays.stream(data).forEach(redBlackTree::insert);
 
+        redBlackTree.resetOperations();
+
         for (int i = 0; i < 10; i++) {
             int random = new Random(10).nextInt();
             for (int j = 0; j < 20; j++) {
@@ -85,6 +89,8 @@ public class TestFrequentAccess {
 
     private static void testContainsForTreap(Treap<Integer> treap, int[] data, String type) {
         Arrays.stream(data).forEach(treap::insert);
+
+        treap.resetOperations();
 
         for (int i = 0; i < 10; i++) {
             int random = new Random(10).nextInt();

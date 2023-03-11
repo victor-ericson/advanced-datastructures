@@ -9,6 +9,13 @@ public class SplayTree<AnyType extends Comparable<? super AnyType>> {
         return rotations;
     }
 
+    public void resetOperations(){
+        operations = 0;
+    }
+    public void resetRotations(){
+        rotations = 0;
+    }
+
     private int operations;
     private int rotations;
     public SplayTree() {

@@ -258,6 +258,13 @@ public class Treap<AnyType extends Comparable<? super AnyType>> {
         return rotations;
     }
 
+    public void resetOperations(){
+        operations = 0;
+    }
+    public void resetRotations(){
+        rotations = 0;
+    }
+
     private static class TreapNode<AnyType> {
         // Constructors
         TreapNode(AnyType theElement) {

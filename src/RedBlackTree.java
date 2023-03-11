@@ -282,6 +282,13 @@ public class RedBlackTree<AnyType extends Comparable<? super AnyType>> {
         return rotations;
     }
 
+    public void resetOperations(){
+        operations = 0;
+    }
+    public void resetRotations(){
+        rotations = 0;
+    }
+
     private static class RedBlackNode<AnyType> {
         // Constructors
         RedBlackNode(AnyType theElement) {
