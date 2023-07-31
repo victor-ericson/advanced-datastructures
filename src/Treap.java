@@ -174,13 +174,11 @@ public class Treap<AnyType extends Comparable<? super AnyType>> {
         if (compareResult < 0) {
             t.left = insert(x, t.left);
             if (t.left.priority < t.priority) {
-                operations++;
                 t = rotateWithLeftChild(t);
             }
         } else if (compareResult > 0) {
             t.right = insert(x, t.right);
             if (t.right.priority < t.priority) {
-                operations++;
                 t = rotateWithRightChild(t);
             }
         }
@@ -237,6 +235,7 @@ public class Treap<AnyType extends Comparable<? super AnyType>> {
      * Rotate binary tree node with left child.
      */
     private TreapNode<AnyType> rotateWithLeftChild(TreapNode<AnyType> k2) {
+        operations++;
         rotations++;
         TreapNode<AnyType> k1 = k2.left;
         k2.left = k1.right;
@@ -248,6 +247,7 @@ public class Treap<AnyType extends Comparable<? super AnyType>> {
      * Rotate binary tree node with right child.
      */
     private TreapNode<AnyType> rotateWithRightChild(TreapNode<AnyType> k1) {
+        operations++;
         rotations++;
         TreapNode<AnyType> k2 = k1.right;
         k1.right = k2.left;

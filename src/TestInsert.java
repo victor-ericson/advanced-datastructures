@@ -61,7 +61,7 @@ public class TestInsert {
         int[] randomNumbers = new int[50];
         Random random = new Random();
         for (int i = 0; i < randomNumbers.length; i++) {
-            randomNumbers[i] = random.nextInt(50);
+            randomNumbers[i] = random.nextInt(data.length);
         }
         Arrays.stream(randomNumbers).forEach(splayTree::insert);
 
@@ -71,11 +71,11 @@ public class TestInsert {
     private static void testSearchForRedBlack(RedBlackTree<Integer> redBlackTree, int[] data, String type) {
         Arrays.stream(data).forEach(redBlackTree::insert);
         redBlackTree.resetOperations();
-        // Insert all random numbers at once outside the loop
+
         int[] randomNumbers = new int[50];
         Random random = new Random();
         for (int i = 0; i < randomNumbers.length; i++) {
-            randomNumbers[i] = random.nextInt(50);
+            randomNumbers[i] = random.nextInt(data.length);
         }
         Arrays.stream(randomNumbers).forEach(redBlackTree::insert);
 
@@ -91,7 +91,7 @@ public class TestInsert {
         int[] randomNumbers = new int[50];
         Random random = new Random();
         for (int i = 0; i < randomNumbers.length; i++) {
-            randomNumbers[i] = random.nextInt(50);
+            randomNumbers[i] = random.nextInt(data.length);
         }
         Arrays.stream(randomNumbers).forEach(treap::insert);
 

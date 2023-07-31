@@ -13,32 +13,32 @@ import java.util.Random;
 public class TestRotations {
 
     public static void main(String[] args) {
-        int[] smallData = generateRandomData(1000);
-        int[] mediumData = generateRandomData(10000);
-        int[] largeData = generateRandomData(3000);
+        int[] dataSetOne = generateRandomData(100);
+        int[] dataSetTwo = generateSortedData(100);
+        int[] dataSetThree = generateReverseSortedData(100);
 
         SplayTree<Integer> splayTree = new SplayTree<>();
         RedBlackTree<Integer> redBlackTree = new RedBlackTree<>();
         Treap<Integer> treap = new Treap<>();
 
         System.out.println("Splay Tree Rotations");
-        testRotationsSplay(splayTree, smallData, "small");
-        testRotationsSplay(splayTree, mediumData, "medium");
-        testRotationsSplay(splayTree, largeData, "large");
+        testRotationsSplay(splayTree, dataSetOne, "1");
+        testRotationsSplay(splayTree, dataSetTwo, "2");
+        testRotationsSplay(splayTree, dataSetThree, "3");
 
         System.out.println();
 
         System.out.println("Red Black Tree Rotations");
-        testRotationsRedBlack(redBlackTree, smallData, "small");
-        testRotationsRedBlack(redBlackTree, mediumData, "medium");
-        testRotationsRedBlack(redBlackTree, largeData, "large");
+        testRotationsRedBlack(redBlackTree, dataSetOne, "1");
+        testRotationsRedBlack(redBlackTree, dataSetTwo, "2");
+        testRotationsRedBlack(redBlackTree, dataSetThree, "3");
 
         System.out.println();
 
         System.out.println("Treap Rotations");
-        testRotationsTreap(treap, smallData, "small");
-        testRotationsTreap(treap, mediumData, "medium");
-        testRotationsTreap(treap, largeData, "large");
+        testRotationsTreap(treap, dataSetOne, "1");
+        testRotationsTreap(treap, dataSetTwo, "2");
+        testRotationsTreap(treap, dataSetThree, "3");
     }
 
     private static int[] generateRandomData(int size) {
@@ -50,18 +50,32 @@ public class TestRotations {
         return data;
     }
 
+    private static int[] generateSortedData(int size) {
+        int[] data = new int[size];
+        Random random = new Random();
+        for (int i = 0; i < size; i++) {
+            data[i] = i;
+        }
+        return data;
+    }
+
+    private static int[] generateReverseSortedData(int size) {
+        int[] data = new int[size];
+        for (int i = 0; i < size; i++) {
+            data[i] = size - i;
+        }
+        return data;
+    }
+
     private static void testRotationsSplay(SplayTree<Integer> splayTree, int[] data, String type) {
-        splayTree.resetRotations();
         Arrays.stream(data).forEach(splayTree::insert);
 
-        for (int i = 0; i < data.length; i++) {
-            splayTree.insert(i);
+        splayTree.resetRotations();
+
+        Random random = new Random();
+        for (int i = 0; i < 50; i++) {
+            splayTree.insert(random.nextInt(1000));
         }
-        splayTree.insert(5);
-        splayTree.insert(25);
-        splayTree.insert(44);
-        splayTree.insert(50);
-        splayTree.insert(49);
 
         System.out.println("Dataset: " + type + ", Rotations: " + splayTree.getRotations());
     }
@@ -70,15 +84,10 @@ public class TestRotations {
         Arrays.stream(data).forEach(redBlackTree::insert);
 
         redBlackTree.resetRotations();
-        for (int i = 0; i < data.length; i++) {
-            redBlackTree.insert(i);
+        Random random = new Random();
+        for (int i = 0; i < 50; i++) {
+            redBlackTree.insert(random.nextInt(1000));
         }
-        redBlackTree.insert(5);
-        redBlackTree.insert(25);
-        redBlackTree.insert(44);
-        redBlackTree.insert(50);
-        redBlackTree.insert(49);
-
 
         System.out.println("Dataset: " + type + ", Rotations: " + redBlackTree.getRotations());
     }
@@ -87,15 +96,10 @@ public class TestRotations {
         Arrays.stream(data).forEach(treap::insert);
 
         treap.resetRotations();
-
-        for (int i = 0; i < data.length; i++) {
-            treap.insert(i);
+        Random random = new Random();
+        for (int i = 0; i < 50; i++) {
+            treap.insert(random.nextInt(1000));
         }
-        treap.insert(5);
-        treap.insert(25);
-        treap.insert(44);
-        treap.insert(50);
-        treap.insert(49);
 
         System.out.println("Dataset: " + type + ", Rotations: " + treap.getRotations());
     }

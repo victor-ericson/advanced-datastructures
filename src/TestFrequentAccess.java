@@ -76,7 +76,7 @@ public class TestFrequentAccess {
         splayTree.resetOperations();
 
         for (int i = 0; i < 10; i++) {
-            int random = new Random(10).nextInt();
+            int random = new Random(data.length).nextInt();
             for (int j = 0; j < 20; j++) {
                 splayTree.contains(random);
             }
@@ -90,7 +90,7 @@ public class TestFrequentAccess {
         redBlackTree.resetOperations();
 
         for (int i = 0; i < 10; i++) {
-            int random = new Random(10).nextInt();
+            int random = new Random(data.length).nextInt();
             for (int j = 0; j < 20; j++) {
                 redBlackTree.contains(random);
             }
@@ -104,7 +104,7 @@ public class TestFrequentAccess {
         treap.resetOperations();
 
         for (int i = 0; i < 10; i++) {
-            int random = new Random(10).nextInt();
+            int random = new Random(data.length).nextInt();
             for (int j = 0; j < 20; j++) {
                 treap.contains(random);
             }
